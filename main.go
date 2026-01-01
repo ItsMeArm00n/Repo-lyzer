@@ -1,6 +1,6 @@
 package main
 
-import "Repo-lyzer/cmd"
+import "github.com/agnivo988/Repo-lyzer/cmd"
 
 func main() {
 	cmd.RunMenu()

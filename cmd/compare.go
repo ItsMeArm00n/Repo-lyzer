@@ -9,8 +9,8 @@ import (
 
 	"os"
 
-	"Repo-lyzer/internal/analyzer"
-	"Repo-lyzer/internal/github"
+	"github.com/agnivo988/Repo-lyzer/internal/analyzer"
+	"github.com/agnivo988/Repo-lyzer/internal/github"
 )
 
 func RunCompare(r1, r2 string) error {

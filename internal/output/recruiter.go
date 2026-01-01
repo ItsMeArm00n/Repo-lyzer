@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/charmbracelet/lipgloss"
-	"Repo-lyzer/internal/analyzer"
+	"github.com/agnivo988/Repo-lyzer/internal/analyzer"
 )
 
 func PrintRecruiterSummary(s analyzer.RecruiterSummary) {

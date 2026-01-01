@@ -1,6 +1,6 @@
 package analyzer
 
-import "Repo-lyzer/internal/github"
+import "github.com/agnivo988/Repo-lyzer/internal/github"
 
 func BusFactor(contributors []github.Contributor) (int, string) {
 	if len(contributors) == 0 {

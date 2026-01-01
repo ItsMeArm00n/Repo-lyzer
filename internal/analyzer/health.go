@@ -1,6 +1,6 @@
 package analyzer
 
-import "Repo-lyzer/internal/github"
+import "github.com/agnivo988/Repo-lyzer/internal/github"
 
 func CalculateHealth(repo *github.Repo, commits []github.Commit) int {
 	score := 50

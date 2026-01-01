@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/spf13/cobra"
-	"Repo-lyzer/internal/analyzer"
-	"Repo-lyzer/internal/github"
-	"Repo-lyzer/internal/output"
+	"github.com/agnivo988/Repo-lyzer/internal/analyzer"
+	"github.com/agnivo988/Repo-lyzer/internal/github"
+	"github.com/agnivo988/Repo-lyzer/internal/output"
 )
 
 func RunAnalyze(owner, repo string) error {

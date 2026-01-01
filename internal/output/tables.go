@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"Repo-lyzer/internal/github"
+	"github.com/agnivo988/Repo-lyzer/internal/github"
 
 	"github.com/olekukonko/tablewriter"
 )

@@ -1,7 +1,7 @@
 package analyzer
 
 import (
-	"Repo-lyzer/internal/github"
+	"github.com/agnivo988/Repo-lyzer/internal/github"
 )
 
 func CommitsPerDay(commits []github.Commit) map[string]int {

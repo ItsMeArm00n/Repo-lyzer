@@ -3,7 +3,7 @@ package analyzer
 import (
 	"time"
 
-	"Repo-lyzer/internal/github"
+	"github.com/agnivo988/Repo-lyzer/internal/github"
 )
 
 func RepoMaturityScore(repo *github.Repo, commits int, contributors int, hasReleases bool) (int, string) {
