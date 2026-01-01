@@ -93,5 +93,17 @@ MIT License © 2026 Agniva Mukherjee
 <img src="https://res.cloudinary.com/dhyii4oiw/image/upload/v1767290545/Screenshot_2026-01-01_224310_c0hhr8.png" alt="This is the Opening Screen" width="auto" height="auto">
 
 
+---
+
+##How to Install(For Users)??
+1.Go to the terminal and run
+```bash
+go install github.com/agnivo988/Repo-lyzer@v1.0.0
+```
+
+2.Then just run 
+```bash
+repo-lyzer
+```
 
 
