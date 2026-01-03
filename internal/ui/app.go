@@ -262,6 +262,29 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				m.compareResult = nil
 				m.compareInput1 = ""
 				m.compareInput2 = ""
+			case "j":
+				// Export comparison to JSON
+				if m.compareResult != nil {
+					filename, err := ExportCompareJSON(*m.compareResult)
+					if err != nil {
+						m.err = err
+					} else {
+						m.err = nil
+						// Show success message briefly (will need status in model)
+						_ = filename // TODO: show status message
+					}
+				}
+			case "m":
+				// Export comparison to Markdown
+				if m.compareResult != nil {
+					filename, err := ExportCompareMarkdown(*m.compareResult)
+					if err != nil {
+						m.err = err
+					} else {
+						m.err = nil
+						_ = filename
+					}
+				}
 			}
 		}
 
@@ -523,7 +546,7 @@ func (m MainModel) compareResultView() string {
 	}
 	verdictBox := BoxStyle.Render("📌 Verdict\n" + verdict)
 
-	footer := SubtleStyle.Render("q/ESC: back to menu")
+	footer := SubtleStyle.Render("j: export JSON • m: export Markdown • q/ESC: back to menu")
 
 	content := lipgloss.JoinVertical(
 		lipgloss.Left,
