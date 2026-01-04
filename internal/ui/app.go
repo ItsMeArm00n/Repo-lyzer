@@ -70,6 +70,12 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.WindowSizeMsg:
 		m.windowWidth = msg.Width
 		m.windowHeight = msg.Height
+		// Handle terminal resize
+		if m.windowWidth != msg.Width || m.windowHeight != msg.Height {
+			// Adapt layout accordingly
+			m.windowWidth = msg.Width
+			m.windowHeight = msg.Height
+		}
 		// Propagate to children
 		m.menu.Update(msg)
 		m.dashboard.Update(msg)
@@ -90,7 +96,7 @@ func (m MainModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	case string:
 		if msg == "switch_to_tree" {
-			m.state = stateTree
+			m.state = stateFileTree
 			// Update tree with current analysis data
 			if m.dashboard.data.Repo != nil {
 				m.tree = NewTreeModel(&m.dashboard.data)
@@ -231,6 +237,8 @@ func (m MainModel) View() string {
 		)
 	case stateDashboard:
 		return m.dashboard.View()
+	case stateFileTree:
+		return m.tree.View()
 	}
 	return ""
 }
@@ -278,16 +286,28 @@ func (m MainModel) analyzeRepo(repoName string) tea.Cmd {
 		tracker.NextStage()
 
 		// Stage 2: Analyze commits
-		commits, _ := client.GetCommits(parts[0], parts[1], 365)
+		commits, err := client.GetCommits(parts[0], parts[1], 365)
+		if err != nil {
+			return fmt.Errorf("failed to get commits: %w", err)
+		}
 		tracker.NextStage()
 
 		// Stage 3: Analyze contributors
-		contributors, _ := client.GetContributors(parts[0], parts[1])
+		contributors, err := client.GetContributors(parts[0], parts[1])
+		if err != nil {
+			return fmt.Errorf("failed to get contributors: %w", err)
+		}
 		tracker.NextStage()
 
 		// Stage 4: Analyze languages
-		languages, _ := client.GetLanguages(parts[0], parts[1])
-		fileTree, _ := client.GetFileTree(parts[0], parts[1], repo.DefaultBranch)
+		languages, err := client.GetLanguages(parts[0], parts[1])
+		if err != nil {
+			return fmt.Errorf("failed to get languages: %w", err)
+		}
+		fileTree, err := client.GetFileTree(parts[0], parts[1], repo.DefaultBranch)
+		if err != nil {
+			return fmt.Errorf("failed to get file tree: %w", err)
+		}
 		tracker.NextStage()
 
 		// Stage 5: Compute metrics

@@ -33,8 +33,15 @@ var analyzeCmd = &cobra.Command{
 			return err
 		}
 
-		langs, _ := client.GetLanguages(parts[0], parts[1])
-		commits, _ := client.GetCommits(parts[0], parts[1], 365)
+		langs, err := client.GetLanguages(parts[0], parts[1])
+		if err != nil {
+			return fmt.Errorf("failed to get languages: %w", err)
+		}
+
+		commits, err := client.GetCommits(parts[0], parts[1], 365)
+		if err != nil {
+			return fmt.Errorf("failed to get commits: %w", err)
+		}
          
 		
 		score := analyzer.CalculateHealth(repo, commits)
